@@ -1,4 +1,3 @@
-from copy import deepcopy
 from datetime import date, timedelta
 import json
 import random
@@ -30,7 +29,6 @@ class EarningCrawler:
                 json_data = json.loads(content.text)
                 events = json_data.get('events')
                 if events:
-                    events = deepcopy(events)
                     for event in events:
                         del event['company']['_links']
                     
@@ -64,6 +62,7 @@ if __name__ == '__main__':
     start_date = date(2018,11,1)
     end_date = date(2018,11,9)
     
+    # this is where you store the chromedriver (chromedriver contained in this repo as well)
     driver_path = '/home/fricative/finance_crawler/finance_crawler/chromedriver'
     crawler = EarningCrawler(driver_path)
     result = crawler.crawl_market(market, start_date, end_date)
